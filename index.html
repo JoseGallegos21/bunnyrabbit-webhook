@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BunnyRabbit - Plataforma de Mensajería</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; min-height: 100vh; }
+    .navbar { background: white; padding: 15px 40px; display: flex; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .logo { color: #25D366; font-size: 24px; font-weight: bold; }
+    .hero { text-align: center; padding: 80px 20px 40px; }
+    .hero h1 { font-size: 42px; color: #1a1a1a; margin-bottom: 15px; }
+    .hero p { font-size: 18px; color: #666; margin-bottom: 40px; }
+    .btn-connect { background: #25D366; color: white; padding: 18px 40px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+    .btn-connect:hover { background: #128C7E; }
+    .features { display: flex; gap: 20px; max-width: 900px; margin: 50px auto; padding: 0 20px; }
+    .feature { background: white; border-radius: 12px; padding: 30px; flex: 1; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .feature h3 { margin: 15px 0 10px; color: #1a1a1a; }
+    .feature p { color: #666; font-size: 14px; }
+    .icon { font-size: 36px; }
+    .status { text-align: center; margin-top: 20px; font-size: 18px; color: #25D366; font-weight: bold; }
+    .dashboard { display: none; max-width: 900px; margin: 30px auto; padding: 0 20px; }
+    .dashboard.visible { display: block; }
+    .dash-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .dash-card h3 { color: #25D366; margin-bottom: 15px; }
+    .stats { display: flex; gap: 15px; }
+    .stat { flex: 1; text-align: center; background: #f8f9fa; padding: 15px; border-radius: 8px; }
+    .stat-num { font-size: 28px; font-weight: bold; color: #25D366; }
+    .stat-label { color: #666; font-size: 13px; }
+    .message-row { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .avatar { width: 40px; height: 40px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-right: 15px; }
+    .msg-info { flex: 1; }
+    .msg-name { font-weight: bold; font-size: 14px; }
+    .msg-preview { color: #666; font-size: 13px; }
+    .msg-time { color: #999; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">BunnyRabbit</div>
+  </div>
+
+  <div class="hero">
+    <h1>Mensajeria Masiva para WhatsApp</h1>
+    <p>Conecta tu WhatsApp Business y gestiona miles de conversaciones desde un solo lugar</p>
+    <button class="btn-connect" onclick="conectarWhatsApp()">
+      Conectar WhatsApp Business
+    </button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="icon">📨</div>
+      <h3>Mensajes Masivos</h3>
+      <p>Envia campanas personalizadas a miles de clientes</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💬</div>
+      <h3>Soporte Unificado</h3>
+      <p>Gestiona todas las conversaciones desde una bandeja unificada</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🔄</div>
+      <h3>Sincronizacion</h3>
+      <p>Sincroniza tu historial y contactos automaticamente</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📊</div>
+      <h3>Analiticas</h3>
+      <p>Metricas de entrega y conversion en tiempo real</p>
+    </div>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+    <div class="dash-card">
+      <h3>Resumen de hoy</h3>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">1,284</div><div class="stat-label">Mensajes enviados</div></div>
+        <div class="stat"><div class="stat-num">347</div><div class="stat-label">Conversaciones activas</div></div>
+        <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Tasa de entrega</div></div>
+        <div class="stat"><div class="stat-num">42</div><div class="stat-label">Contactos nuevos</div></div>
+      </div>
+    </div>
+    <div class="dash-card">
+      <h3>Conversaciones recientes</h3>
+      <div class="message-row">
+        <div class="avatar">MG</div>
+        <div class="msg-info">
+          <div class="msg-name">Maria Garcia</div>
+          <div class="msg-preview">Hola, quisiera informacion sobre sus servicios</div>
+        </div>
+        <div class="msg-time">hace 2 min</div>
+      </div>
+      <div class="message-row">
+        <div class="avatar">JL</div>
+        <div class="msg-info">
+          <div class="msg-name">Juan Lopez</div>
+          <div class="msg-preview">Cuando llegara mi pedido?</div>
+        </div>
+        <div class="msg-time">hace 5 min</div>
+      </div>
+      <div class="message-row">
+        <div class="avatar">AR</div>
+        <div class="msg-info">
+          <div class="msg-name">Ana Rodriguez</div>
+          <div class="msg-preview">Gracias por la atencion, excelente servicio</div>
+        </div>
+        <div class="msg-time">hace 12 min</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '2858603801147516',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v23.0'
+      });
+    };
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    window.addEventListener('message', function(event) {
+      if (event.origin !== "https://www.facebook.com") return;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === 'WA_EMBEDDED_SIGNUP') {
+          if (data.event === 'FINISH' || data.event === 'FINISH_WHATSAPP_BUSINESS_APP_ONBOARDING') {
+            document.getElementById('status').innerHTML = 'WhatsApp Business conectado exitosamente!';
+            document.getElementById('dashboard').classList.add('visible');
+          }
+        }
+      } catch(e) {}
+    });
+
+    function conectarWhatsApp() {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          document.getElementById('status').innerHTML = 'WhatsApp Business conectado exitosamente!';
+          document.getElementById('dashboard').classList.add('visible');
+        }
+      }, {
+        config_id: '1383138236947896',
+        response_type: 'code',
+        override_default_response_type: true,
+        extras: {
+          setup: {},
+          featureType: 'whatsapp_business_app_onboarding',
+          sessionInfoVersion: '3'
+        }
+      });
+    }
+  </script>
+</body>
+</html>
